@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madhu Yadav Rajireddy - Senior OTT & Smart TV Engineer</title>
+    <!-- Google Fonts: Syne & DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #030014;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --indigo: #6366f1;
+            --pink: #ec4899;
+            --cyan: #06b6d4;
+            --amber: #f59e0b;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Hide default cursor */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--indigo), var(--pink));
+            border-radius: 10px;
+        }
+
+        /* Noise Overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.04;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--cyan);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
+        }
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--pink);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+        }
+
+        a:hover ~ .cursor-ring, button:hover ~ .cursor-ring, .nav-link:hover ~ .cursor-ring {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(236, 72, 153, 0.1);
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg);
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 2s ease-out, visibility 2s ease-out;
+        }
+        .loader-initials {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            background: linear-gradient(to right, var(--cyan), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+        .loader-bar-container {
+            width: 200px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .loader-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--pink));
+            animation: loadBar 2s ease-in-out forwards;
+        }
+        @keyframes loadBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Glass Panel Reusable */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-panel:hover {
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.1);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(3, 0, 20, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .logo span {
+            color: var(--pink);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #fff;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--pink));
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, var(--text-main), var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Layout */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 6rem;
+        }
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+        }
+        .greeting {
+            color: var(--cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .shimmer-text {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--text-muted), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            background: linear-gradient(to right, var(--cyan), var(--indigo));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .summary {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, var(--indigo), var(--pink));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid var(--glass-border);
+            margin-left: 1rem;
+        }
+        .btn-outline:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* 3D Card */
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        .floating-card {
+            width: 340px;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            border-left: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating-card h3 {
+            font-size: 2.5rem;
+            color: var(--amber);
+            margin-bottom: 0.5rem;
+            transform: translateZ(30px);
+        }
+        .floating-card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            transform: translateZ(20px);
+        }
+        .floating-card .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+            margin: 1.5rem 0;
+            transform: translateZ(10px);
+        }
+        .card-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+            transform: translateZ(15px);
+            font-size: 0.95rem;
+        }
+        .card-stat span {
+            color: var(--cyan);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(-5deg); }
+            50% { transform: translateY(-20px) rotateX(10deg) rotateY(5deg); }
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+        .about-text strong {
+            color: #fff;
+        }
+        .awards-card {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        .awards-card h3 {
+            color: var(--amber);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        .awards-card .award-item {
+            margin-bottom: 1.5rem;
+        }
+        .awards-card .award-item h4 {
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+        .awards-card .award-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--cyan);
+        }
+        .tech-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .chip {
+            background: rgba(255,255,255,0.05);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s;
+        }
+        .chip:hover {
+            background: rgba(236, 72, 153, 0.1);
+            border-color: var(--pink);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        
+        /* Animated Progress Bars */
+        .skill-bars-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+        }
+        .skill-bar-container {
+            margin-bottom: 1.5rem;
+        }
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--indigo));
+            width: 0;
+            border-radius: 3px;
+            transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--indigo), var(--pink));
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+        }
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+        .timeline-item:hover .timeline-dot {
+            background: var(--pink);
+            box-shadow: 0 0 15px var(--pink);
+            border-color: #fff;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 13px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 3px solid var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+            transition: all 0.3s ease;
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-header h3 {
+            font-size: 1.3rem;
+            color: var(--text-main);
+        }
+        .timeline-date {
+            color: var(--amber);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .timeline-company {
+            color: var(--pink);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .timeline-details {
+            list-style: none;
+        }
+        .timeline-details li {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        .timeline-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: left 0.5s ease;
+        }
+        .project-card:hover::before {
+            left: 100%;
+        }
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .project-header h3 {
+            font-size: 1.4rem;
+            color: #fff;
+        }
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        .project-features li {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .project-features li::before {
+            content: '✓';
+            color: var(--amber);
+            margin-right: 8px;
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+        .tech-tags span {
+            font-size: 0.75rem;
+            color: var(--cyan);
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        /* Education & Languages */
+        .edu-lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Contact */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        .contact-item .icon {
+            font-size: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+        }
+        .contact-item a, .contact-item p {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .contact-item a:hover {
+            color: var(--pink);
+        }
+        
+        /* Ripple Avatar */
+        .contact-avatar-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 300px;
+        }
+        .ripple-avatar {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--indigo), var(--pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+            z-index: 1;
+        }
+        .avatar-text {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+        }
+        .ripple {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid var(--pink);
+            animation: rippleAnim 3s linear infinite;
+            z-index: -1;
+        }
+        .ripple:nth-child(2) { animation-delay: 1s; }
+        .ripple:nth-child(3) { animation-delay: 2s; }
+        @keyframes rippleAnim {
+            0% { width: 150px; height: 150px; opacity: 1; }
+            100% { width: 300px; height: 300px; opacity: 0; }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .menu-btn {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+        }
+        .menu-btn__burger, .menu-btn__burger::before, .menu-btn__burger::after {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-btn__burger::before, .menu-btn__burger::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+        .menu-btn__burger::before { top: -8px; }
+        .menu-btn__burger::after { top: 8px; }
+        
+        .nav-links.open {
+            transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+            }
+            .hero-content {
+                margin-bottom: 4rem;
+            }
+            .hero-visual {
+                width: 100%;
+            }
+            .shimmer-text {
+                font-size: 2.8rem;
+            }
+            .about-grid, .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                background: rgba(3, 0, 20, 0.95);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+                gap: 3rem;
+            }
+            .nav-links.open {
+                transform: translateX(0);
+            }
+        }
+        @media (max-width: 480px) {
+            .shimmer-text {
+                font-size: 2.2rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .floating-card {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .timeline-item {
+                padding-left: 40px;
+            }
+            .timeline::before {
+                left: 10px;
+            }
+            .timeline-dot {
+                left: 3px;
+            }
+            .section {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <h1 class="loader-initials">MR</h1>
+        <div class="loader-bar-container">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <a href="#home" class="logo">M<span>R</span>.</a>
+        <div class="nav-links">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="menu-btn" id="menu-btn">
+            <div class="menu-btn__burger"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero section">
+        <div class="hero-content reveal">
+            <p class="greeting">Hello, I'm</p>
+            <h1 class="shimmer-text">Madhu Yadav Rajireddy</h1>
+            <h2 class="subtitle">Senior OTT & Smart TV Engineer</h2>
+            <p class="summary">Building and optimizing large-scale streaming applications across Web, Smart TV, and Connected TV ecosystems at a global OTT provider.</p>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://linkedin.com/in/rmadhuy1729" target="_blank" class="btn btn-outline">LinkedIn</a>
+            </div>
+        </div>
+        <div class="hero-visual reveal">
+            <div class="floating-card" id="tilt-card">
+                <h3>4+ Years</h3>
+                <p>OTT & Smart TV Engineering</p>
+                <div class="divider"></div>
+                <div class="card-stat">
+                    <span>📺</span> Samsung Tizen & LG webOS
+                </div>
+                <div class="card-stat">
+                    <span>⚡</span> HLS, DASH, DRM
+                </div>
+                <div class="card-stat">
+                    <span>🚀</span> 100% App Compliance Rate
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <h2 class="section-title reveal">Professional Summary</h2>
+        <div class="about-grid">
+            <div class="about-text glass-panel reveal">
+                <p>Senior OTT & Smart TV Engineer with 4+ years of experience building and optimizing large-scale streaming applications across Web, Smart TV, and Connected TV ecosystems.</p>
+                <p>Specialist in <strong>Samsung Tizen and LG webOS platforms</strong>, with deep expertise in video streaming technologies (HLS, DASH), DRM systems (Widevine, FairPlay), and player frameworks (Shaka Player, JW Player).</p>
+                <p>Recognized for engineering a <strong>custom Ad-Tech SDK for legacy Smart TV environments</strong>, replacing Google IMA SDK and unlocking monetization capabilities on hardware-constrained devices.</p>
+                <p>Strong background in device-level performance optimization, memory profiling, app store compliance, and end-to-end OTT delivery pipelines. Proven ability to build scalable frontend architectures while leading global releases.</p>
+            </div>
+            <div class="awards-card glass-panel reveal">
+                <h3>Awards & Recognition</h3>
+                <div class="award-item">
+                    <h4>🏆 Top Performer Award</h4>
+                    <p>YuppTV India - For consistent high-impact contributions in OTT and Smart TV engineering.</p>
+                </div>
+                <div class="award-item">
+                    <h4>🌟 Internal Excellence</h4>
+                    <p>YuppTV India - For building and productionizing a custom Ad-Tech SDK for legacy Smart TVs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <h2 class="section-title reveal">Expertise & Skills</h2>
+        <div class="skills-container">
+            <!-- Animated Bars Column -->
+            <div class="skill-bars-section reveal">
+                <h3>Technical Proficiency</h3>
+                
+                <div class="skill-bar-container">
+                    <div class="skill-info">
+                        <span>Smart TV Platforms (Tizen/webOS)</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress" data-width="95%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info">
+                        <span>Video Streaming (HLS/DASH/DRM)</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress" data-width="90%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info">
+                        <span>Frontend Architecture (Angular/React)</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress" data-width="85%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info">
+                        <span>Ad-Tech & Monetization</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress" data-width="88%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Chips Column -->
+            <div class="skills-grid">
+                <div class="skill-category glass-panel reveal">
+                    <h3>Smart TV & OTT</h3>
+                    <div class="tech-chips">
+                        <span class="chip">Samsung Tizen</span>
+                        <span class="chip">LG webOS</span>
+                        <span class="chip">CTV Ecosystems</span>
+                        <span class="chip">App Store Certification</span>
+                        <span class="chip">Legacy Optimization</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-panel reveal">
+                    <h3>Streaming & Frontend</h3>
+                    <div class="tech-chips">
+                        <span class="chip">HLS / DASH</span>
+                        <span class="chip">Widevine / FairPlay</span>
+                        <span class="chip">Shaka Player</span>
+                        <span class="chip">Angular / React</span>
+                        <span class="chip">TypeScript</span>
+                        <span class="chip">PubNub / AWS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <h2 class="section-title reveal">Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-panel">
+                    <div class="timeline-header">
+                        <h3>Senior Software Engineer – OTT & Smart TV</h3>
+                        <span class="timeline-date">Oct 2021 – Present</span>
+                    </div>
+                    <div class="timeline-company">Yupp Video Services (YuppTV India Pvt. Ltd.) | Hyderabad</div>
+                    <ul class="timeline-details">
+                        <li><strong>Smart TV Platform Engineering:</strong> Led development across Samsung Tizen and LG webOS. Owned end-to-end app lifecycle with 100% compliance rate globally.</li>
+                        <li><strong>Ad-Tech Innovation:</strong> Architected a custom Ads SDK for legacy Smart TVs, replacing IMA SDK, unlocking monetization on hardware-constrained devices.</li>
+                        <li><strong>Streaming & Video:</strong> Implemented Widevine/FairPlay DRM. Optimized Shaka/JW Player for fast startup, buffer recovery, and low latency.</li>
+                        <li><strong>Frontend Architecture:</strong> Designed scalable OTT frontend with Angular/TS. Built reusable UI libraries, cutting feature dev time by 40%.</li>
+                        <li><strong>Real-Time & DevOps:</strong> Developed real-time sync using PubNub/WebSockets for multi-device experiences. Managed Jenkins CI/CD and AWS deployments.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
+        <h2 class="section-title reveal">Key Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card glass-panel reveal">
+                <div class="project-header">
+                    <h3>📺 Watcho – Smart TV OTT</h3>
+                </div>
+                <p>Led full-cycle development of Smart TV OTT applications for Samsung Tizen and LG webOS platforms tailored for high-traffic streaming.</p>
+                <ul class="project-features">
+                    <li>Live TV streaming & Video-on-Demand (VOD)</li>
+                    <li>Secure DRM playback integration</li>
+                    <li>Integrated ad-tech monetization modules</li>
+                    <li>Launched apps globally with zero compliance failures</li>
+                </ul>
+                <div class="tech-tags">
+                    <span>Samsung Tizen</span>
+                    <span>LG webOS</span>
+                    <span>DRM</span>
+                    <span>Shaka Player</span>
+                    <span>Angular</span>
+                </div>
+            </div>
+            
+            <div class="project-card glass-panel reveal" style="border-color: rgba(236, 72, 153, 0.3);">
+                <div class="project-header">
+                    <h3>💡 Custom Ad-Tech SDK</h3>
+                </div>
+                <p>Engineered a proprietary Ad-Tech SDK from scratch to bypass Google IMA SDK limitations on legacy Smart TV devices.</p>
+                <ul class="project-features">
+                    <li>Operates under strict memory & hardware constraints</li>
+                    <li>Enabled monetization on unsupported legacy devices</li>
+                    <li>Ensured stable playback and seamless ad insertion</li>
+                    <li>Earned Internal Excellence Recognition Award</li>
+                </ul>
+                <div class="tech-tags">
+                    <span>Vanilla JS</span>
+                    <span>Memory Profiling</span>
+                    <span>Ad-Tech</span>
+                    <span>Video Lifecycle</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Languages Section -->
+    <section id="education" class="education section">
+        <h2 class="section-title reveal">Education & Languages</h2>
+        <div class="edu-lang-grid">
+            <div class="glass-panel reveal" style="border-color: rgba(6, 182, 212, 0.3);">
+                <h3 style="color: var(--cyan); margin-bottom: 1.5rem; font-size: 1.3rem;">🎓 Education</h3>
+                <div style="margin-bottom: 1rem;">
+                    <h4 style="color: #fff; margin-bottom: 0.3rem;">Bachelor of Technology</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Computer Science & Engineering</p>
+                </div>
+            </div>
+            <div class="glass-panel reveal" style="border-color: rgba(79, 70, 229, 0.3);">
+                <h3 style="color: var(--indigo); margin-bottom: 1.5rem; font-size: 1.3rem;">🌍 Languages</h3>
+                <div class="tech-chips">
+                    <span class="chip">English (Professional)</span>
+                    <span class="chip">Hindi (Conversational)</span>
+                    <span class="chip">Telugu (Native)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <h2 class="section-title reveal">Get In Touch</h2>
+        <div class="contact-container reveal">
+            <div class="contact-info glass-panel">
+                <div class="contact-item">
+                    <span class="icon">📍</span>
+                    <p>Hyderabad, India</p>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📞</span>
+                    <a href="tel:+919381208503">+91-9381208503</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">✉️</span>
+                    <a href="mailto:Madhuy1729@gmail.com">Madhuy1729@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">🔗</span>
+                    <a href="https://linkedin.com/in/rmadhuy1729" target="_blank">linkedin.com/in/rmadhuy1729</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">💻</span>
+                    <a href="https://github.com/Madhu-1729" target="_blank">github.com/Madhu-1729</a>
+                </div>
+            </div>
+            <div class="contact-avatar-container">
+                <div class="ripple-avatar">
+                    <div class="avatar-text">MR</div>
+                    <div class="ripple"></div>
+                    <div class="ripple"></div>
+                    <div class="ripple"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- 1. Loading Screen ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 2000);
+        });
+
+        // --- 2. Custom Cursor ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            
+            // Add a slight delay to the ring for a trailing effect
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            }, 50);
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursorDot.style.opacity = '0';
+            cursorRing.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            cursorDot.style.opacity = '1';
+            cursorRing.style.opacity = '1';
+        });
+
+        // --- 3. Particle Background ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 15000;
+            // Limit particles on mobile for performance
+            if(window.innerWidth < 768) {
+                numberOfParticles = (canvas.height * canvas.width) / 25000;
+            }
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1.5) - 0.75;
+                let directionY = (Math.random() * 1.5) - 0.75;
+                let color = Math.random() > 0.5 ? 'rgba(6, 182, 212, 0.4)' : 'rgba(236, 72, 153, 0.4)';
+                
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 10) * (canvas.height / 10)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(99, 102, 241,' + opacityValue + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+        // --- 4. Scroll Reveal & Animated Progress Bars (Intersection Observer) ---
+        const reveals = document.querySelectorAll('.reveal');
+        const progressBars = document.querySelectorAll('.progress');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        reveals.forEach(reveal => {
+            revealObserver.observe(reveal);
+        });
+
+        const progressObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const progress = entry.target;
+                    progress.style.width = progress.getAttribute('data-width');
+                    observer.unobserve(progress);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        progressBars.forEach(bar => progressObserver.observe(bar));
+
+        // --- 5. Mobile Menu ---
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-link');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            if(!menuOpen) {
+                menuBtn.querySelector('.menu-btn__burger').style.background = 'transparent';
+                menuBtn.querySelector('.menu-btn__burger').style.transform = 'rotate(45deg)';
+                navLinks.classList.add('open');
+                menuOpen = true;
+            } else {
+                menuBtn.querySelector('.menu-btn__burger').style.background = '#fff';
+                menuBtn.querySelector('.menu-btn__burger').style.transform = 'rotate(0)';
+                navLinks.classList.remove('open');
+                menuOpen = false;
+            }
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if(menuOpen) {
+                    menuBtn.click();
+                }
+            });
+        });
+
+        // --- 6. 3D Card Hover Effect ---
+        const card = document.getElementById('tilt-card');
+        
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -15;
+                const rotateY = ((x - centerX) / centerX) * 15;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                card.style.transition = 'none';
+                card.style.animation = 'none';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.transition = 'transform 0.5s ease';
+                card.style.animation = 'float 6s ease-in-out infinite';
+            });
+        }
+        
+        // --- 7. Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.padding = '1rem 5%';
+                navbar.style.background = 'rgba(3, 0, 20, 0.85)';
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                navbar.style.padding = '1.5rem 5%';
+                navbar.style.background = 'rgba(3, 0, 20, 0.5)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
