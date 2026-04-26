@@ -1,1347 +1,2308 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madhu Yadav Rajireddy - Senior OTT & Smart TV Engineer</title>
-    <!-- Google Fonts: Syne & DM Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg: #030014;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --indigo: #6366f1;
-            --pink: #ec4899;
-            --cyan: #06b6d4;
-            --amber: #f59e0b;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --font-display: 'Syne', sans-serif;
-            --font-body: 'DM Sans', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madhu Yadav · Senior Frontend Developer</title>
+  <meta name="description"
+    content="Senior Frontend Developer — Angular, React, TypeScript, OTT Platforms, Smart TV. 4+ years at YuppTV India. Hyderabad." />
+  <meta name="keywords"
+    content="Angular Developer, React Developer, Senior Frontend Engineer, TypeScript, NgRx, Redux, RxJS, OTT Platform, Smart TV Developer, Samsung Tizen, LG webOS, Shaka Player, HLS DASH Streaming, DRM, Ad Tech SDK, Hyderabad, UI Lead, Frontend Architect, Component Library, AWS CloudFront, Jenkins CI/CD, Web Performance, Core Web Vitals" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none; /* Hide default cursor */
-        }
+    :root {
+      --indigo: #6366f1;
+      --indigo-d: #4f46e5;
+      --indigo-l: #818cf8;
+      --pink: #ec4899;
+      --pink-d: #db2777;
+      --pink-l: #f472b6;
+      --cyan: #06b6d4;
+      --cyan-d: #0891b2;
+      --cyan-l: #22d3ee;
+      --amber: #f59e0b;
+      --amber-d: #d97706;
+      --amber-l: #fbbf24;
+      --bg: #040611;
+      --bg2: #070b1a;
+      --bg3: #0d1225;
+      --surf: #111827;
+      --surf2: #1a2235;
+      --surf3: #1f2a3f;
+      --txt: #f1f5f9;
+      --txt2: #94a3b8;
+      --txt3: #64748b;
+      --border: rgba(99, 102, 241, .18);
+      --glow-i: 0 0 40px rgba(99, 102, 241, .35);
+      --glow-p: 0 0 40px rgba(236, 72, 153, .3);
+      --glow-c: 0 0 40px rgba(6, 182, 212, .3);
+      --r: 1rem;
+      --r2: 1.5rem;
+      --r3: 2rem;
+      --transition: .35s cubic-bezier(.4, 0, .2, 1);
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px
+    }
 
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none
+    }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--indigo), var(--pink));
-            border-radius: 10px;
-        }
+    /* ─── SCROLLBAR ────────────────────────────────── */
+    ::-webkit-scrollbar {
+      width: 6px
+    }
 
-        /* Noise Overlay */
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.04;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
+    ::-webkit-scrollbar-track {
+      background: var(--bg)
+    }
 
-        /* Particle Canvas */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--indigo), var(--pink));
+      border-radius: 3px
+    }
 
-        /* Custom Cursor */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--cyan);
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
-        }
-        .cursor-ring {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--pink);
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
-        }
+    /* ─── NOISE OVERLAY ────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: .4;
+    }
 
-        a:hover ~ .cursor-ring, button:hover ~ .cursor-ring, .nav-link:hover ~ .cursor-ring {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(236, 72, 153, 0.1);
-        }
+    /* ─── CANVAS BG ────────────────────────────────── */
+    #particles-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none
+    }
 
-        /* Loading Screen */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg);
-            z-index: 100000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            transition: opacity 2s ease-out, visibility 2s ease-out;
-        }
-        .loader-initials {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            background: linear-gradient(to right, var(--cyan), var(--pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-        .loader-bar-container {
-            width: 200px;
-            height: 4px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .loader-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--pink));
-            animation: loadBar 2s ease-in-out forwards;
-        }
-        @keyframes loadBar {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
+    /* ─── CURSOR ───────────────────────────────────── */
+    #cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--indigo);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform .1s, background .2s;
+      mix-blend-mode: screen;
+    }
 
-        /* Glass Panel Reusable */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        .glass-panel:hover {
-            border-color: rgba(255,255,255,0.15);
-            box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.1);
-        }
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--indigo-l);
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform .18s ease, width .2s, height .2s, border-color .2s;
+      opacity: .7;
+    }
 
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(3, 0, 20, 0.5);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-        .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-        .logo span {
-            color: var(--pink);
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #fff;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--cyan), var(--pink));
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
+    body:has(a:hover) #cursor,
+    body:has(button:hover) #cursor {
+      background: var(--pink);
+      transform: translate(-50%, -50%) scale(1.5)
+    }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: var(--font-display);
-        }
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            background: linear-gradient(to right, var(--text-main), var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    body:has(a:hover) #cursor-ring,
+    body:has(button:hover) #cursor-ring {
+      width: 54px;
+      height: 54px;
+      border-color: var(--pink-l)
+    }
 
-        /* Layout */
-        .section {
-            padding: 6rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* ─── LOADER ───────────────────────────────────── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9997;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
 
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 6rem;
-        }
-        .hero-content {
-            flex: 1;
-            max-width: 650px;
-        }
-        .greeting {
-            color: var(--cyan);
-            font-family: var(--font-display);
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-        }
-        .shimmer-text {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, var(--text-muted), #fff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-        }
-        @keyframes shimmer {
-            to { background-position: 200% center; }
-        }
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            background: linear-gradient(to right, var(--cyan), var(--indigo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .summary {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .btn-primary {
-            background: linear-gradient(45deg, var(--indigo), var(--pink));
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-        }
-        .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
-            transform: translateY(-2px);
-        }
-        .btn-outline {
-            background: transparent;
-            color: #fff;
-            border: 1px solid var(--glass-border);
-            margin-left: 1rem;
-        }
-        .btn-outline:hover {
-            border-color: var(--cyan);
-            color: var(--cyan);
-        }
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden
+    }
 
-        /* 3D Card */
-        .hero-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            perspective: 1000px;
-        }
-        .floating-card {
-            width: 340px;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            border-top: 1px solid rgba(255,255,255,0.2);
-            border-left: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            transform-style: preserve-3d;
-            animation: float 6s ease-in-out infinite;
-        }
-        .floating-card h3 {
-            font-size: 2.5rem;
-            color: var(--amber);
-            margin-bottom: 0.5rem;
-            transform: translateZ(30px);
-        }
-        .floating-card p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            transform: translateZ(20px);
-        }
-        .floating-card .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
-            margin: 1.5rem 0;
-            transform: translateZ(10px);
-        }
-        .card-stat {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 0.8rem;
-            transform: translateZ(15px);
-            font-size: 0.95rem;
-        }
-        .card-stat span {
-            color: var(--cyan);
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotateX(5deg) rotateY(-5deg); }
-            50% { transform: translateY(-20px) rotateX(10deg) rotateY(5deg); }
-        }
+    .loader-initials {
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      background: linear-gradient(135deg, var(--indigo), var(--pink), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse-text 1.5s ease-in-out infinite alternate;
+    }
 
-        /* About Grid */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-        .about-text p {
-            margin-bottom: 1rem;
-        }
-        .about-text strong {
-            color: #fff;
-        }
-        .awards-card {
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-        .awards-card h3 {
-            color: var(--amber);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-        .awards-card .award-item {
-            margin-bottom: 1.5rem;
-        }
-        .awards-card .award-item h4 {
-            color: #fff;
-            margin-bottom: 0.3rem;
-        }
-        .awards-card .award-item p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
+    @keyframes pulse-text {
+      from {
+        filter: brightness(1)
+      }
 
-        /* Skills */
-        .skills-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        .skill-category h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.2rem;
-            color: var(--cyan);
-        }
-        .tech-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-        .chip {
-            background: rgba(255,255,255,0.05);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s;
-        }
-        .chip:hover {
-            background: rgba(236, 72, 153, 0.1);
-            border-color: var(--pink);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-        
-        /* Animated Progress Bars */
-        .skill-bars-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--text-main);
-        }
-        .skill-bar-container {
-            margin-bottom: 1.5rem;
-        }
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        .progress-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--cyan), var(--indigo));
-            width: 0;
-            border-radius: 3px;
-            transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1);
-        }
+      to {
+        filter: brightness(1.4)
+      }
+    }
 
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--indigo), var(--pink));
-        }
-        .timeline-item {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 3rem;
-            transition: transform 0.3s ease;
-        }
-        .timeline-item:hover {
-            transform: translateX(10px);
-        }
-        .timeline-item:hover .timeline-dot {
-            background: var(--pink);
-            box-shadow: 0 0 15px var(--pink);
-            border-color: #fff;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 13px;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 3px solid var(--cyan);
-            box-shadow: 0 0 10px var(--cyan);
-            transition: all 0.3s ease;
-        }
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            margin-bottom: 0.5rem;
-        }
-        .timeline-header h3 {
-            font-size: 1.3rem;
-            color: var(--text-main);
-        }
-        .timeline-date {
-            color: var(--amber);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        .timeline-company {
-            color: var(--pink);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-        .timeline-details {
-            list-style: none;
-        }
-        .timeline-details li {
-            margin-bottom: 0.8rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-        .timeline-details li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--cyan);
-        }
+    .loader-bar-wrap {
+      width: 220px;
+      height: 3px;
+      background: var(--surf2);
+      border-radius: 2px;
+      overflow: hidden
+    }
 
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: left 0.5s ease;
-        }
-        .project-card:hover::before {
-            left: 100%;
-        }
-        .project-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
-        }
-        .project-header h3 {
-            font-size: 1.4rem;
-            color: #fff;
-        }
-        .project-card p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-        .project-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-        .project-features li {
-            font-size: 0.85rem;
-            color: #cbd5e1;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-        .project-features li::before {
-            content: '✓';
-            color: var(--amber);
-            margin-right: 8px;
-        }
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-        .tech-tags span {
-            font-size: 0.75rem;
-            color: var(--cyan);
-            background: rgba(6, 182, 212, 0.1);
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-        }
+    .loader-bar {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--indigo), var(--pink), var(--cyan), var(--amber));
+      background-size: 300% 100%;
+      animation: bar-fill 1.8s ease forwards, bar-shimmer 1.5s linear infinite
+    }
 
-        /* Education & Languages */
-        .edu-lang-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+    @keyframes bar-fill {
+      from {
+        width: 0
+      }
 
-        /* Contact */
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4rem;
-            align-items: center;
-            justify-content: center;
-        }
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-        .contact-item .icon {
-            font-size: 1.5rem;
-            background: rgba(255,255,255,0.05);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 1px solid var(--glass-border);
-        }
-        .contact-item a, .contact-item p {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        .contact-item a:hover {
-            color: var(--pink);
-        }
-        
-        /* Ripple Avatar */
-        .contact-avatar-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            min-width: 300px;
-        }
-        .ripple-avatar {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--indigo), var(--pink));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-            z-index: 1;
-        }
-        .avatar-text {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 800;
-            color: #fff;
-        }
-        .ripple {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 2px solid var(--pink);
-            animation: rippleAnim 3s linear infinite;
-            z-index: -1;
-        }
-        .ripple:nth-child(2) { animation-delay: 1s; }
-        .ripple:nth-child(3) { animation-delay: 2s; }
-        @keyframes rippleAnim {
-            0% { width: 150px; height: 150px; opacity: 1; }
-            100% { width: 300px; height: 300px; opacity: 0; }
-        }
+      to {
+        width: 100%
+      }
+    }
 
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    @keyframes bar-shimmer {
+      0% {
+        background-position: 100% 0
+      }
 
-        /* Mobile Menu */
-        .menu-btn {
-            display: none;
-            cursor: pointer;
-            z-index: 1001;
-            padding: 10px;
-        }
-        .menu-btn__burger, .menu-btn__burger::before, .menu-btn__burger::after {
-            width: 25px;
-            height: 2px;
-            background: #fff;
-            position: relative;
-            transition: all 0.3s ease-in-out;
-        }
-        .menu-btn__burger::before, .menu-btn__burger::after {
-            content: '';
-            position: absolute;
-            left: 0;
-        }
-        .menu-btn__burger::before { top: -8px; }
-        .menu-btn__burger::after { top: 8px; }
-        
-        .nav-links.open {
-            transform: translateX(0);
-        }
+      100% {
+        background-position: -100% 0
+      }
+    }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 8rem;
-            }
-            .hero-content {
-                margin-bottom: 4rem;
-            }
-            .hero-visual {
-                width: 100%;
-            }
-            .shimmer-text {
-                font-size: 2.8rem;
-            }
-            .about-grid, .skills-container {
-                grid-template-columns: 1fr;
-            }
-            .menu-btn {
-                display: block;
-            }
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: 0;
-                height: 100vh;
-                width: 70%;
-                background: rgba(3, 0, 20, 0.95);
-                backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transform: translateX(100%);
-                transition: transform 0.4s ease;
-                gap: 3rem;
-            }
-            .nav-links.open {
-                transform: translateX(0);
-            }
-        }
-        @media (max-width: 480px) {
-            .shimmer-text {
-                font-size: 2.2rem;
-            }
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            .floating-card {
-                width: 100%;
-                padding: 1.5rem;
-            }
-            .timeline-item {
-                padding-left: 40px;
-            }
-            .timeline::before {
-                left: 10px;
-            }
-            .timeline-dot {
-                left: 3px;
-            }
-            .section {
-                padding: 4rem 5%;
-            }
-        }
-    </style>
+    .loader-text {
+      font-size: .8rem;
+      color: var(--txt3);
+      letter-spacing: .15em;
+      text-transform: uppercase
+    }
+
+    /* ─── NAVBAR ───────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      background: rgba(4, 6, 17, .65);
+      border-bottom: 1px solid var(--border);
+      padding: .85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding var(--transition), box-shadow var(--transition);
+    }
+
+    nav.scrolled {
+      padding: .6rem 2rem;
+      box-shadow: var(--glow-i)
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, var(--indigo-l), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: .25rem;
+      list-style: none
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: .4rem .85rem;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--txt2);
+      text-decoration: none;
+      border-radius: .5rem;
+      transition: color var(--transition);
+      letter-spacing: .02em;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      right: 50%;
+      height: 2px;
+      border-radius: 1px;
+      background: linear-gradient(90deg, var(--indigo), var(--pink));
+      transition: left var(--transition), right var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--txt)
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      left: .85rem;
+      right: .85rem
+    }
+
+    .nav-cta {
+      padding: .45rem 1.2rem;
+      border-radius: .6rem;
+      font-size: .85rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--indigo), var(--pink));
+      color: #fff;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 0 20px rgba(99, 102, 241, .3);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--glow-i)
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none
+    }
+
+    .nav-hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--txt);
+      border-radius: 1px;
+      transition: var(--transition)
+    }
+
+    /* ─── SECTIONS ─────────────────────────────────── */
+    section {
+      position: relative;
+      z-index: 2;
+      padding: 7rem 2rem
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--indigo-l);
+      margin-bottom: .75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--indigo), var(--pink));
+      border-radius: 1px
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--indigo-l), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .section-sub {
+      color: var(--txt2);
+      max-width: 560px;
+      margin-bottom: 3rem;
+      font-size: 1.05rem
+    }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 3rem;
+      align-items: center
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      font-size: .8rem;
+      color: var(--cyan-l);
+      background: rgba(6, 182, 212, .08);
+      margin-bottom: 1.5rem;
+      animation: fadeInDown .6s ease both;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: blink 1.4s ease infinite
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .3
+      }
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: .75rem;
+      background: linear-gradient(135deg, #fff 0%, var(--indigo-l) 40%, var(--pink) 70%, var(--amber) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer-name 4s linear infinite, fadeInUp .7s ease both;
+    }
+
+    @keyframes shimmer-name {
+      0% {
+        background-position: 0% center
+      }
+
+      100% {
+        background-position: 200% center
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--txt2);
+      margin-bottom: .5rem;
+      animation: fadeInUp .7s .1s ease both;
+    }
+
+    .hero-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1.75rem;
+      animation: fadeInUp .7s .2s ease both
+    }
+
+    .hero-role-chip {
+      padding: .3rem .85rem;
+      border-radius: 2rem;
+      font-size: .78rem;
+      font-weight: 500;
+      border: 1px solid;
+    }
+
+    .chip-indigo {
+      color: var(--indigo-l);
+      border-color: rgba(99, 102, 241, .35);
+      background: rgba(99, 102, 241, .1)
+    }
+
+    .chip-pink {
+      color: var(--pink-l);
+      border-color: rgba(236, 72, 153, .35);
+      background: rgba(236, 72, 153, .1)
+    }
+
+    .chip-cyan {
+      color: var(--cyan-l);
+      border-color: rgba(6, 182, 212, .35);
+      background: rgba(6, 182, 212, .1)
+    }
+
+    .chip-amber {
+      color: var(--amber-l);
+      border-color: rgba(245, 158, 11, .35);
+      background: rgba(245, 158, 11, .1)
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      animation: fadeInUp .7s .3s ease both
+    }
+
+    .btn-primary {
+      padding: .7rem 1.8rem;
+      border-radius: .75rem;
+      font-weight: 600;
+      font-size: .95rem;
+      background: linear-gradient(135deg, var(--indigo), var(--pink));
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, .35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(99, 102, 241, .5)
+    }
+
+    .btn-outline {
+      padding: .7rem 1.8rem;
+      border-radius: .75rem;
+      font-weight: 600;
+      font-size: .95rem;
+      background: transparent;
+      color: var(--txt);
+      border: 1.5px solid rgba(99, 102, 241, .5);
+      text-decoration: none;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--indigo);
+      background: rgba(99, 102, 241, .1);
+      transform: translateY(-2px)
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      animation: fadeInUp .7s .4s ease both
+    }
+
+    .metric {
+      text-align: center
+    }
+
+    .metric-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--indigo-l), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .metric-lbl {
+      font-size: .72rem;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: .1em
+    }
+
+    /* ─── 3D CARD ───────────────────────────────────── */
+    .hero-card-wrap {
+      perspective: 1000px;
+      animation: fadeInUp .8s .5s ease both
+    }
+
+    .hero-3d-card {
+      background: linear-gradient(135deg, var(--surf) 0%, var(--surf3) 100%);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      transform-style: preserve-3d;
+      transition: transform .6s ease;
+      box-shadow: var(--glow-i), 0 40px 80px rgba(0, 0, 0, .5);
+    }
+
+    .hero-3d-card:hover {
+      transform: rotateX(-6deg) rotateY(6deg) translateZ(20px)
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .card-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--indigo), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #fff;
+      box-shadow: var(--glow-i);
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem
+    }
+
+    .card-company {
+      font-size: .82rem;
+      color: var(--indigo-l)
+    }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem
+    }
+
+    .card-stat {
+      background: var(--bg3);
+      border-radius: .75rem;
+      padding: .85rem;
+      border: 1px solid rgba(99, 102, 241, .12)
+    }
+
+    .card-stat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700
+    }
+
+    .card-stat-val.indigo {
+      color: var(--indigo-l)
+    }
+
+    .card-stat-val.pink {
+      color: var(--pink-l)
+    }
+
+    .card-stat-val.cyan {
+      color: var(--cyan-l)
+    }
+
+    .card-stat-val.amber {
+      color: var(--amber-l)
+    }
+
+    .card-stat-lbl {
+      font-size: .7rem;
+      color: var(--txt3);
+      margin-top: .2rem
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: 1.2rem
+    }
+
+    .card-tag {
+      font-size: .7rem;
+      padding: .2rem .6rem;
+      border-radius: .4rem;
+      background: rgba(99, 102, 241, .12);
+      color: var(--indigo-l);
+      border: 1px solid rgba(99, 102, 241, .2)
+    }
+
+    /* ─── TABS ──────────────────────────────────────── */
+    .tab-nav {
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      background: var(--surf);
+      border-radius: 1rem;
+      padding: .4rem
+    }
+
+    .tab-btn {
+      padding: .55rem 1.2rem;
+      border-radius: .75rem;
+      font-size: .85rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--txt2);
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--indigo), var(--pink));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, .3)
+    }
+
+    .tab-panel {
+      display: none
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fadeInUp .4s ease
+    }
+
+    /* ─── SKILLS ────────────────────────────────────── */
+    #skills {
+      background: linear-gradient(180deg, transparent, rgba(13, 18, 37, .6), transparent)
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem
+    }
+
+    .skill-group-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+      color: var(--indigo-l)
+    }
+
+    .skill-bar-item {
+      margin-bottom: 1.1rem
+    }
+
+    .skill-bar-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .35rem;
+      font-size: .85rem;
+      font-weight: 500
+    }
+
+    .skill-bar-track {
+      height: 7px;
+      background: var(--surf2);
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0;
+      transition: width 1.4s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .fill-indigo {
+      background: linear-gradient(90deg, var(--indigo), var(--indigo-l))
+    }
+
+    .fill-pink {
+      background: linear-gradient(90deg, var(--pink-d), var(--pink))
+    }
+
+    .fill-cyan {
+      background: linear-gradient(90deg, var(--cyan-d), var(--cyan))
+    }
+
+    .fill-amber {
+      background: linear-gradient(90deg, var(--amber-d), var(--amber))
+    }
+
+    .fill-multi {
+      background: linear-gradient(90deg, var(--indigo), var(--pink), var(--cyan))
+    }
+
+    .chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.5rem
+    }
+
+    .chip {
+      padding: .35rem .85rem;
+      border-radius: 2rem;
+      font-size: .78rem;
+      font-weight: 500;
+      border: 1px solid;
+      transition: transform .2s, box-shadow .2s;
+      cursor: default;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px)
+    }
+
+    .chip.c-i {
+      color: var(--indigo-l);
+      border-color: rgba(99, 102, 241, .3);
+      background: rgba(99, 102, 241, .08)
+    }
+
+    .chip.c-i:hover {
+      box-shadow: 0 4px 15px rgba(99, 102, 241, .3)
+    }
+
+    .chip.c-p {
+      color: var(--pink-l);
+      border-color: rgba(236, 72, 153, .3);
+      background: rgba(236, 72, 153, .08)
+    }
+
+    .chip.c-p:hover {
+      box-shadow: 0 4px 15px rgba(236, 72, 153, .3)
+    }
+
+    .chip.c-c {
+      color: var(--cyan-l);
+      border-color: rgba(6, 182, 212, .3);
+      background: rgba(6, 182, 212, .08)
+    }
+
+    .chip.c-c:hover {
+      box-shadow: 0 4px 15px rgba(6, 182, 212, .3)
+    }
+
+    .chip.c-a {
+      color: var(--amber-l);
+      border-color: rgba(245, 158, 11, .3);
+      background: rgba(245, 158, 11, .08)
+    }
+
+    .chip.c-a:hover {
+      box-shadow: 0 4px 15px rgba(245, 158, 11, .3)
+    }
+
+    /* ─── EXPERIENCE TIMELINE ───────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: .75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--indigo), var(--pink), var(--cyan))
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: .25rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--indigo), var(--pink));
+      border: 3px solid var(--bg);
+      box-shadow: var(--glow-i);
+    }
+
+    .timeline-card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 1.75rem;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .timeline-card:hover {
+      border-color: var(--indigo);
+      box-shadow: var(--glow-i);
+      transform: translateX(6px)
+    }
+
+    .tl-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-bottom: 1rem
+    }
+
+    .tl-company {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem
+    }
+
+    .tl-role {
+      color: var(--indigo-l);
+      font-weight: 600;
+      font-size: .9rem;
+      margin-top: .15rem
+    }
+
+    .tl-badge {
+      padding: .3rem .85rem;
+      border-radius: 2rem;
+      font-size: .72rem;
+      font-weight: 600;
+      background: rgba(99, 102, 241, .15);
+      color: var(--indigo-l);
+      border: 1px solid rgba(99, 102, 241, .25);
+      white-space: nowrap;
+    }
+
+    .tl-desc {
+      color: var(--txt2);
+      font-size: .9rem;
+      margin-bottom: 1rem;
+      line-height: 1.65
+    }
+
+    .tl-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem
+    }
+
+    .tl-bullets li {
+      font-size: .875rem;
+      color: var(--txt2);
+      padding-left: 1.25rem;
+      position: relative
+    }
+
+    .tl-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--indigo-l)
+    }
+
+    .tl-achievements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1rem
+    }
+
+    .achievement {
+      font-size: .75rem;
+      padding: .25rem .7rem;
+      border-radius: .4rem;
+      font-weight: 500;
+      background: rgba(245, 158, 11, .1);
+      color: var(--amber-l);
+      border: 1px solid rgba(245, 158, 11, .2);
+    }
+
+    /* ─── OTT SECTION ───────────────────────────────── */
+    .ott-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem
+    }
+
+    .ott-card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 1.75rem;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ott-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, .06), rgba(6, 182, 212, .06));
+      transition: opacity var(--transition);
+    }
+
+    .ott-card:hover::before {
+      opacity: 1
+    }
+
+    .ott-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: var(--glow-c)
+    }
+
+    .ott-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem
+    }
+
+    .ott-card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: .5rem;
+      color: var(--cyan-l)
+    }
+
+    .ott-card-desc {
+      font-size: .875rem;
+      color: var(--txt2);
+      line-height: 1.65;
+      margin-bottom: 1rem
+    }
+
+    .ott-stats {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .ott-stat {
+      text-align: center;
+      min-width: 70px
+    }
+
+    .ott-stat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--cyan-l)
+    }
+
+    .ott-stat-lbl {
+      font-size: .68rem;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: .08em
+    }
+
+    .platform-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: 1rem
+    }
+
+    .ptag {
+      font-size: .72rem;
+      padding: .2rem .6rem;
+      border-radius: .35rem;
+      font-weight: 600;
+      background: rgba(6, 182, 212, .1);
+      color: var(--cyan-l);
+      border: 1px solid rgba(6, 182, 212, .2)
+    }
+
+    .ads-pipeline {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .pipeline-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--amber-l)
+    }
+
+    .pipeline-steps {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .p-step {
+      padding: .5rem 1rem;
+      border-radius: .6rem;
+      font-size: .8rem;
+      font-weight: 600;
+      background: rgba(245, 158, 11, .1);
+      color: var(--amber-l);
+      border: 1px solid rgba(245, 158, 11, .2);
+    }
+
+    .p-arrow {
+      color: var(--txt3);
+      font-size: .85rem
+    }
+
+    .award-banner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, .12), rgba(236, 72, 153, .08));
+      border: 1px solid rgba(245, 158, 11, .25);
+      border-radius: var(--r);
+    }
+
+    .award-icon {
+      font-size: 1.75rem
+    }
+
+    .award-text strong {
+      color: var(--amber-l);
+      font-weight: 700;
+      display: block;
+      font-size: .95rem
+    }
+
+    .award-text span {
+      font-size: .82rem;
+      color: var(--txt2)
+    }
+
+    /* ─── PROJECTS ──────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem
+    }
+
+    .project-card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 1.75rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: calc(var(--r2) + 2px);
+      background: linear-gradient(135deg, var(--indigo), var(--pink), var(--cyan), var(--amber));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: transparent;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .5)
+    }
+
+    .project-card:hover::after {
+      opacity: .5
+    }
+
+    .project-emoji {
+      font-size: 2.4rem;
+      margin-bottom: .85rem
+    }
+
+    .project-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: .5rem
+    }
+
+    .project-desc {
+      font-size: .875rem;
+      color: var(--txt2);
+      line-height: 1.65;
+      margin-bottom: 1.25rem
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem
+    }
+
+    .project-tag {
+      font-size: .72rem;
+      padding: .2rem .65rem;
+      border-radius: .4rem;
+      font-weight: 500;
+      background: rgba(99, 102, 241, .1);
+      color: var(--indigo-l);
+      border: 1px solid rgba(99, 102, 241, .2)
+    }
+
+    /* ─── EDUCATION & LANGUAGES ─────────────────────── */
+    .edu-lang-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem
+    }
+
+    .edu-card,
+    .lang-card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 1.75rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .edu-card:hover {
+      border-color: var(--indigo);
+      box-shadow: var(--glow-i)
+    }
+
+    .lang-card:hover {
+      border-color: var(--pink);
+      box-shadow: var(--glow-p)
+    }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: .4rem
+    }
+
+    .edu-uni {
+      color: var(--indigo-l);
+      font-size: .9rem;
+      margin-bottom: .25rem
+    }
+
+    .edu-year {
+      color: var(--txt3);
+      font-size: .82rem
+    }
+
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+      margin-top: .75rem
+    }
+
+    .lang-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .lang-name {
+      font-size: .9rem;
+      font-weight: 500
+    }
+
+    .lang-badge {
+      padding: .2rem .7rem;
+      border-radius: 2rem;
+      font-size: .72rem;
+      font-weight: 600;
+      background: rgba(236, 72, 153, .12);
+      color: var(--pink-l);
+      border: 1px solid rgba(236, 72, 153, .25)
+    }
+
+    /* ─── CONTACT ───────────────────────────────────── */
+    #contact {
+      background: linear-gradient(180deg, transparent, rgba(13, 18, 37, .8))
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start
+    }
+
+    .contact-intro p {
+      color: var(--txt2);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem
+    }
+
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: .85rem
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      text-decoration: none;
+      color: var(--txt);
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .contact-card:hover {
+      border-color: var(--indigo);
+      box-shadow: var(--glow-i);
+      transform: translateX(6px)
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: .65rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .ci-indigo {
+      background: rgba(99, 102, 241, .15);
+      color: var(--indigo-l)
+    }
+
+    .ci-pink {
+      background: rgba(236, 72, 153, .15);
+      color: var(--pink-l)
+    }
+
+    .ci-cyan {
+      background: rgba(6, 182, 212, .15);
+      color: var(--cyan-l)
+    }
+
+    .ci-amber {
+      background: rgba(245, 158, 11, .15);
+      color: var(--amber-l)
+    }
+
+    .contact-card-label {
+      font-size: .75rem;
+      color: var(--txt3);
+      margin-bottom: .1rem
+    }
+
+    .contact-card-val {
+      font-size: .9rem;
+      font-weight: 500
+    }
+
+    .contact-avatar-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem
+    }
+
+    .ripple-avatar {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .ripple-avatar::before,
+    .ripple-avatar::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(99, 102, 241, .3);
+      animation: ripple-out 2.5s linear infinite;
+    }
+
+    .ripple-avatar::after {
+      animation-delay: 1.25s
+    }
+
+    @keyframes ripple-out {
+      0% {
+        width: 100%;
+        height: 100%;
+        opacity: .8
+      }
+
+      100% {
+        width: 200%;
+        height: 200%;
+        opacity: 0
+      }
+    }
+
+    .avatar-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--indigo), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.8rem;
+      color: #fff;
+      box-shadow: var(--glow-i), 0 20px 40px rgba(0, 0, 0, .4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .availability {
+      text-align: center;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      font-size: .82rem;
+      color: var(--cyan-l);
+      font-weight: 500;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--txt3);
+      font-size: .82rem;
+    }
+
+    footer span {
+      color: var(--indigo-l)
+    }
+
+    /* ─── REVEAL ANIMATIONS ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────── */
+    @media(max-width:900px) {
+      .hero-grid {
+        grid-template-columns: 1fr
+      }
+
+      .hero-card-wrap {
+        order: -1
+      }
+
+      .hero-3d-card {
+        max-width: 400px;
+        margin: 0 auto
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr
+      }
+
+      .edu-lang-grid {
+        grid-template-columns: 1fr
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr
+      }
+
+      .contact-avatar-wrap {
+        display: none
+      }
+    }
+
+    @media(max-width:600px) {
+      section {
+        padding: 5rem 1.25rem
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(4, 6, 17, .97);
+        backdrop-filter: blur(20px);
+        padding: 1rem 1.5rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-hamburger {
+        display: flex
+      }
+
+      .pipeline-steps {
+        flex-direction: column;
+        align-items: flex-start
+      }
+
+      .p-arrow {
+        transform: rotate(90deg)
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Noise Overlay -->
-    <div class="noise"></div>
 
-    <!-- Loading Screen -->
-    <div id="loader">
-        <h1 class="loader-initials">MR</h1>
-        <div class="loader-bar-container">
-            <div class="loader-bar"></div>
-        </div>
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- CANVAS -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-initials" style="font-size: 2.5rem;">Madhu Yadav R.</div>
+    <div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
     </div>
+    <div class="loader-text">Loading portfolio…</div>
+  </div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Madhu&nbsp;Yadav&nbsp;R.</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:Madhuy1729@gmail.com" class="nav-cta">Hire Me</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-    <!-- Particle Canvas -->
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- Navbar -->
-    <nav id="navbar">
-        <a href="#home" class="logo">M<span>R</span>.</a>
-        <div class="nav-links">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#experience" class="nav-link">Experience</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </div>
-        <div class="menu-btn" id="menu-btn">
-            <div class="menu-btn__burger"></div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero section">
-        <div class="hero-content reveal">
-            <p class="greeting">Hello, I'm</p>
-            <h1 class="shimmer-text">Madhu Yadav Rajireddy</h1>
-            <h2 class="subtitle">Senior OTT & Smart TV Engineer</h2>
-            <p class="summary">Building and optimizing large-scale streaming applications across Web, Smart TV, and Connected TV ecosystems at a global OTT provider.</p>
-            <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="https://linkedin.com/in/rmadhuy1729" target="_blank" class="btn btn-outline">LinkedIn</a>
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-name">Madhu Yadav<br>Rajireddy Gari</h1>
+          <p class="hero-sub">Senior Frontend Developer · OTT &amp; Smart TV Specialist</p>
+          <div class="hero-roles">
+            <span class="hero-role-chip chip-indigo">Angular Expert</span>
+            <span class="hero-role-chip chip-pink">React Developer</span>
+            <span class="hero-role-chip chip-cyan">TypeScript</span>
+            <span class="hero-role-chip chip-amber">OTT Platforms</span>
+            <span class="hero-role-chip chip-indigo">Frontend Architect</span>
+            <span class="hero-role-chip chip-pink">Smart TV · Tizen · webOS</span>
+          </div>
+          <div class="hero-ctas">
+            <a href="mailto:Madhuy1729@gmail.com" class="btn-primary">Get In Touch</a>
+            <a href="https://linkedin.com/in/rmadhuy1729" target="_blank" class="btn-outline">LinkedIn ↗</a>
+            <a href="https://github.com/Madhu-1729" target="_blank" class="btn-outline">GitHub ↗</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <div class="metric-val">4+</div>
+              <div class="metric-lbl">Years XP</div>
             </div>
+            <div class="metric">
+              <div class="metric-val">40%</div>
+              <div class="metric-lbl">Velocity ↑</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">100%</div>
+              <div class="metric-lbl">Store Pass</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">2×</div>
+              <div class="metric-lbl">Awards</div>
+            </div>
+          </div>
         </div>
-        <div class="hero-visual reveal">
-            <div class="floating-card" id="tilt-card">
-                <h3>4+ Years</h3>
-                <p>OTT & Smart TV Engineering</p>
-                <div class="divider"></div>
-                <div class="card-stat">
-                    <span>📺</span> Samsung Tizen & LG webOS
-                </div>
-                <div class="card-stat">
-                    <span>⚡</span> HLS, DASH, DRM
-                </div>
-                <div class="card-stat">
-                    <span>🚀</span> 100% App Compliance Rate
-                </div>
+        <div class="hero-card-wrap">
+          <div class="hero-3d-card">
+            <div class="card-header">
+              <div class="card-avatar" style="font-size: 1rem; text-align: center; line-height: 1.1; display: flex; align-items: center; justify-content: center;">MR</div>
+              <div>
+                <div class="card-title">Senior Frontend Dev</div>
+                <div class="card-company">YuppTV India · Hyderabad</div>
+              </div>
             </div>
+            <div class="card-stats">
+              <div class="card-stat">
+                <div class="card-stat-val indigo">Angular</div>
+                <div class="card-stat-lbl">v8 → v16</div>
+              </div>
+              <div class="card-stat">
+                <div class="card-stat-val pink">React</div>
+                <div class="card-stat-lbl">Hooks · Redux</div>
+              </div>
+              <div class="card-stat">
+                <div class="card-stat-val cyan">OTT</div>
+                <div class="card-stat-lbl">HLS · DASH · DRM</div>
+              </div>
+              <div class="card-stat">
+                <div class="card-stat-val amber">Smart TV</div>
+                <div class="card-stat-lbl">Tizen · webOS</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="card-tag">TypeScript</span>
+              <span class="card-tag">NgRx</span>
+              <span class="card-tag">Shaka Player</span>
+              <span class="card-tag">AWS</span>
+              <span class="card-tag">Jenkins</span>
+              <span class="card-tag">Custom Ad SDK</span>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="about section">
-        <h2 class="section-title reveal">Professional Summary</h2>
-        <div class="about-grid">
-            <div class="about-text glass-panel reveal">
-                <p>Senior OTT & Smart TV Engineer with 4+ years of experience building and optimizing large-scale streaming applications across Web, Smart TV, and Connected TV ecosystems.</p>
-                <p>Specialist in <strong>Samsung Tizen and LG webOS platforms</strong>, with deep expertise in video streaming technologies (HLS, DASH), DRM systems (Widevine, FairPlay), and player frameworks (Shaka Player, JW Player).</p>
-                <p>Recognized for engineering a <strong>custom Ad-Tech SDK for legacy Smart TV environments</strong>, replacing Google IMA SDK and unlocking monetization capabilities on hardware-constrained devices.</p>
-                <p>Strong background in device-level performance optimization, memory profiling, app store compliance, and end-to-end OTT delivery pipelines. Proven ability to build scalable frontend architectures while leading global releases.</p>
+  <!-- ═══════════ SKILLS ═══════════ -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Technical Arsenal</div>
+      <h2 class="section-title">Skills &amp; <span>Expertise</span></h2>
+      <p class="section-sub">4+ years of hands-on production experience across the full frontend lifecycle</p>
+      <div class="skills-grid reveal">
+        <div>
+          <div class="skill-group-title">Core Frontend</div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Angular (v8–v16)</span><span>95%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-indigo" data-w="95"></div>
             </div>
-            <div class="awards-card glass-panel reveal">
-                <h3>Awards & Recognition</h3>
-                <div class="award-item">
-                    <h4>🏆 Top Performer Award</h4>
-                    <p>YuppTV India - For consistent high-impact contributions in OTT and Smart TV engineering.</p>
-                </div>
-                <div class="award-item">
-                    <h4>🌟 Internal Excellence</h4>
-                    <p>YuppTV India - For building and productionizing a custom Ad-Tech SDK for legacy Smart TVs.</p>
-                </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>TypeScript / JavaScript ES6+</span><span>92%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-indigo" data-w="92"></div>
             </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>React.js · Hooks · Redux</span><span>82%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-pink" data-w="82"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>NgRx · RxJS · State Management</span><span>88%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-pink" data-w="88"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>HTML5 · SCSS · CSS3 · Responsive</span><span>93%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-cyan" data-w="93"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Performance · Web Vitals · Lighthouse</span><span>85%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-amber" data-w="85"></div>
+            </div>
+          </div>
+
+          <div class="skill-group-title" style="margin-top:2rem">OTT &amp; Streaming</div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>HLS · DASH · Shaka · JW Player</span><span>90%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-cyan" data-w="90"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Widevine · FairPlay DRM</span><span>88%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-cyan" data-w="88"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Samsung Tizen · LG webOS</span><span>87%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-amber" data-w="87"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Custom Ad-Tech SDK</span><span>91%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-amber" data-w="91"></div>
+            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills section">
-        <h2 class="section-title reveal">Expertise & Skills</h2>
-        <div class="skills-container">
-            <!-- Animated Bars Column -->
-            <div class="skill-bars-section reveal">
-                <h3>Technical Proficiency</h3>
-                
-                <div class="skill-bar-container">
-                    <div class="skill-info">
-                        <span>Smart TV Platforms (Tizen/webOS)</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress" data-width="95%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-bar-container">
-                    <div class="skill-info">
-                        <span>Video Streaming (HLS/DASH/DRM)</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress" data-width="90%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-bar-container">
-                    <div class="skill-info">
-                        <span>Frontend Architecture (Angular/React)</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress" data-width="85%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-bar-container">
-                    <div class="skill-info">
-                        <span>Ad-Tech & Monetization</span>
-                        <span>88%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress" data-width="88%"></div>
-                    </div>
-                </div>
+        <div>
+          <div class="skill-group-title">DevOps &amp; Cloud</div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>AWS S3 · CloudFront · EC2</span><span>78%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-multi" data-w="78"></div>
             </div>
-
-            <!-- Tech Chips Column -->
-            <div class="skills-grid">
-                <div class="skill-category glass-panel reveal">
-                    <h3>Smart TV & OTT</h3>
-                    <div class="tech-chips">
-                        <span class="chip">Samsung Tizen</span>
-                        <span class="chip">LG webOS</span>
-                        <span class="chip">CTV Ecosystems</span>
-                        <span class="chip">App Store Certification</span>
-                        <span class="chip">Legacy Optimization</span>
-                    </div>
-                </div>
-                <div class="skill-category glass-panel reveal">
-                    <h3>Streaming & Frontend</h3>
-                    <div class="tech-chips">
-                        <span class="chip">HLS / DASH</span>
-                        <span class="chip">Widevine / FairPlay</span>
-                        <span class="chip">Shaka Player</span>
-                        <span class="chip">Angular / React</span>
-                        <span class="chip">TypeScript</span>
-                        <span class="chip">PubNub / AWS</span>
-                    </div>
-                </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Jenkins · CI/CD Pipelines</span><span>75%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-multi" data-w="75"></div>
             </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Git · GitHub · Bitbucket</span><span>90%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-indigo" data-w="90"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-top"><span>Webpack · Vite · Angular CLI</span><span>82%</span></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill fill-pink" data-w="82"></div>
+            </div>
+          </div>
+
+          <div class="skill-group-title" style="margin-top:2rem">All Technologies</div>
+          <div class="chips-wrap">
+            <span class="chip c-i">Angular</span><span class="chip c-i">React</span><span
+              class="chip c-i">TypeScript</span>
+            <span class="chip c-p">NgRx</span><span class="chip c-p">Redux</span><span class="chip c-p">RxJS</span>
+            <span class="chip c-c">HLS/DASH</span><span class="chip c-c">Shaka Player</span><span
+              class="chip c-c">Widevine DRM</span>
+            <span class="chip c-a">Samsung Tizen</span><span class="chip c-a">LG webOS</span><span
+              class="chip c-a">Chromecast</span>
+            <span class="chip c-i">Material UI</span><span class="chip c-i">SCSS/Sass</span><span
+              class="chip c-i">Tailwind</span>
+            <span class="chip c-p">REST APIs</span><span class="chip c-p">GraphQL</span><span
+              class="chip c-p">WebSockets</span>
+            <span class="chip c-c">AWS S3</span><span class="chip c-c">CloudFront</span><span
+              class="chip c-c">Jenkins</span>
+            <span class="chip c-a">Jest</span><span class="chip c-a">Jasmine</span><span class="chip c-a">Cypress</span>
+            <span class="chip c-i">Webpack</span><span class="chip c-i">Vite</span><span class="chip c-p">PubNub</span>
+            <span class="chip c-p">JIRA</span><span class="chip c-c">Postman</span><span class="chip c-c">Figma</span>
+            <span class="chip c-a">Agile/Scrum</span><span class="chip c-a">Code Reviews</span><span
+              class="chip c-i">Mentoring</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience section">
-        <h2 class="section-title reveal">Work Experience</h2>
+  <!-- ═══════════ EXPERIENCE + OTT TABS ═══════════ -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">Career &amp; Specialisations</div>
+      <h2 class="section-title">Experience &amp; <span>OTT Expertise</span></h2>
+      <p class="section-sub">Architecting high-traffic streaming platforms · Custom Ad-Tech · Smart TV ecosystems</p>
+
+      <div class="tab-nav reveal">
+        <button class="tab-btn active" onclick="switchTab('experience-tab',this)">💼 Work Experience</button>
+        <button class="tab-btn" onclick="switchTab('ott-tab',this)">📺 OTT &amp; Smart TV</button>
+      </div>
+
+      <!-- EXPERIENCE TAB -->
+      <div id="experience-tab" class="tab-panel active">
         <div class="timeline">
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content glass-panel">
-                    <div class="timeline-header">
-                        <h3>Senior Software Engineer – OTT & Smart TV</h3>
-                        <span class="timeline-date">Oct 2021 – Present</span>
-                    </div>
-                    <div class="timeline-company">Yupp Video Services (YuppTV India Pvt. Ltd.) | Hyderabad</div>
-                    <ul class="timeline-details">
-                        <li><strong>Smart TV Platform Engineering:</strong> Led development across Samsung Tizen and LG webOS. Owned end-to-end app lifecycle with 100% compliance rate globally.</li>
-                        <li><strong>Ad-Tech Innovation:</strong> Architected a custom Ads SDK for legacy Smart TVs, replacing IMA SDK, unlocking monetization on hardware-constrained devices.</li>
-                        <li><strong>Streaming & Video:</strong> Implemented Widevine/FairPlay DRM. Optimized Shaka/JW Player for fast startup, buffer recovery, and low latency.</li>
-                        <li><strong>Frontend Architecture:</strong> Designed scalable OTT frontend with Angular/TS. Built reusable UI libraries, cutting feature dev time by 40%.</li>
-                        <li><strong>Real-Time & DevOps:</strong> Developed real-time sync using PubNub/WebSockets for multi-device experiences. Managed Jenkins CI/CD and AWS deployments.</li>
-                    </ul>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="tl-header">
+                <div>
+                  <div class="tl-company">Yupp Video Services — YuppTV India Pvt. Ltd.</div>
+                  <div class="tl-role">Senior Software Engineer – Frontend (Angular · React · TypeScript)</div>
                 </div>
+                <span class="tl-badge">Oct 2021 – Present · 4+ Yrs</span>
+              </div>
+              <p class="tl-desc">YuppTV is a leading global OTT technology provider delivering live TV and VOD streaming
+                to millions across Web, Mobile, and Smart TV ecosystems worldwide.</p>
+              <ul class="tl-bullets">
+                <li>Architected scalable SPAs using <strong>Angular v8–v16</strong> and <strong>React</strong> with
+                  TypeScript for high-traffic OTT platforms</li>
+                <li>Built a reusable <strong>UI component library</strong> standardising design patterns —
+                  <strong>reduced feature delivery time by 40%</strong></li>
+                <li>Engineered a production-ready <strong>Custom Ad-Tech SDK</strong> from scratch, replacing Google IMA
+                  SDK on legacy Smart TV hardware</li>
+                <li>Implemented <strong>NgRx / RxJS</strong> state management and <strong>Redux</strong> middleware for
+                  predictable data flows at scale</li>
+                <li>Integrated <strong>Widevine &amp; FairPlay DRM</strong> for secure premium streaming across web and
+                  Smart TV</li>
+                <li>Optimised <strong>HLS/DASH</strong> pipelines using Shaka Player — reduced latency, improved
+                  buffering recovery</li>
+                <li>Managed end-to-end <strong>Samsung Tizen &amp; LG webOS</strong> app store submissions with
+                  <strong>100% compliance</strong></li>
+                <li>Conducted deep <strong>memory profiling</strong> on legacy hardware — achieved smooth 60fps
+                  rendering on low-memory devices</li>
+                <li>Managed <strong>Jenkins CI/CD</strong> pipelines and <strong>AWS S3 + CloudFront</strong> asset
+                  delivery</li>
+                <li>Mentored 3 junior developers · led rigorous code reviews · enforced SOLID architecture</li>
+              </ul>
+              <div class="tl-achievements">
+                <span class="achievement">🏆 Top Performer Award</span>
+                <span class="achievement">⭐ Internal Excellence Award</span>
+                <span class="achievement">🚀 Custom Ad-Tech SDK</span>
+                <span class="achievement">📺 Samsung + LG Published</span>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects section">
-        <h2 class="section-title reveal">Key Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card glass-panel reveal">
-                <div class="project-header">
-                    <h3>📺 Watcho – Smart TV OTT</h3>
-                </div>
-                <p>Led full-cycle development of Smart TV OTT applications for Samsung Tizen and LG webOS platforms tailored for high-traffic streaming.</p>
-                <ul class="project-features">
-                    <li>Live TV streaming & Video-on-Demand (VOD)</li>
-                    <li>Secure DRM playback integration</li>
-                    <li>Integrated ad-tech monetization modules</li>
-                    <li>Launched apps globally with zero compliance failures</li>
-                </ul>
-                <div class="tech-tags">
-                    <span>Samsung Tizen</span>
-                    <span>LG webOS</span>
-                    <span>DRM</span>
-                    <span>Shaka Player</span>
-                    <span>Angular</span>
-                </div>
+      <!-- OTT TAB -->
+      <div id="ott-tab" class="tab-panel">
+        <div class="ott-grid">
+          <div class="ott-card">
+            <div class="ott-icon">📡</div>
+            <div class="ott-card-title">HLS / DASH Streaming</div>
+            <div class="ott-card-desc">Implemented adaptive bitrate streaming using <strong>Shaka Player</strong> and
+              <strong>JW Player</strong>. Optimised stream initialisation, segment preloading, and buffering recovery
+              across variable network conditions. Reduced average latency by tuning manifest retry logic and ABR
+              algorithms.</div>
+            <div class="ott-stats">
+              <div class="ott-stat">
+                <div class="ott-stat-val">ABR</div>
+                <div class="ott-stat-lbl">Adaptive</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">HLS</div>
+                <div class="ott-stat-lbl">Live + VOD</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">DASH</div>
+                <div class="ott-stat-lbl">Multi-CDN</div>
+              </div>
             </div>
-            
-            <div class="project-card glass-panel reveal" style="border-color: rgba(236, 72, 153, 0.3);">
-                <div class="project-header">
-                    <h3>💡 Custom Ad-Tech SDK</h3>
-                </div>
-                <p>Engineered a proprietary Ad-Tech SDK from scratch to bypass Google IMA SDK limitations on legacy Smart TV devices.</p>
-                <ul class="project-features">
-                    <li>Operates under strict memory & hardware constraints</li>
-                    <li>Enabled monetization on unsupported legacy devices</li>
-                    <li>Ensured stable playback and seamless ad insertion</li>
-                    <li>Earned Internal Excellence Recognition Award</li>
-                </ul>
-                <div class="tech-tags">
-                    <span>Vanilla JS</span>
-                    <span>Memory Profiling</span>
-                    <span>Ad-Tech</span>
-                    <span>Video Lifecycle</span>
-                </div>
+            <div class="platform-tags">
+              <span class="ptag">Shaka Player</span><span class="ptag">JW Player</span><span
+                class="ptag">HLS.js</span><span class="ptag">MSE API</span>
             </div>
+          </div>
+          <div class="ott-card">
+            <div class="ott-icon">🔐</div>
+            <div class="ott-card-title">DRM Content Protection</div>
+            <div class="ott-card-desc">Full-stack DRM integration for premium content protection. Implemented
+              <strong>Widevine</strong> (L1/L3) and <strong>FairPlay</strong> across browsers and Smart TV. Managed
+              licence server communication, key rotation, and compliance with content owner requirements.</div>
+            <div class="ott-stats">
+              <div class="ott-stat">
+                <div class="ott-stat-val">L1/L3</div>
+                <div class="ott-stat-lbl">Widevine</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">FPS</div>
+                <div class="ott-stat-lbl">FairPlay</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">EME</div>
+                <div class="ott-stat-lbl">W3C API</div>
+              </div>
+            </div>
+            <div class="platform-tags">
+              <span class="ptag">Widevine</span><span class="ptag">FairPlay</span><span
+                class="ptag">PlayReady</span><span class="ptag">CENC</span>
+            </div>
+          </div>
+          <div class="ott-card">
+            <div class="ott-icon">📺</div>
+            <div class="ott-card-title">Samsung Tizen · LG webOS</div>
+            <div class="ott-card-desc">Led development of complete Smart TV applications for <strong>Samsung
+                Tizen</strong> and <strong>LG webOS</strong>. Managed the full app lifecycle: development → QA → store
+              submission → certification. Achieved <strong>zero rejection cycles</strong> across all global releases
+              through deep platform knowledge.</div>
+            <div class="ott-stats">
+              <div class="ott-stat">
+                <div class="ott-stat-val">100%</div>
+                <div class="ott-stat-lbl">Store Pass</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">0</div>
+                <div class="ott-stat-lbl">Rejections</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">2+</div>
+                <div class="ott-stat-lbl">Platforms</div>
+              </div>
+            </div>
+            <div class="platform-tags">
+              <span class="ptag">Tizen 5+</span><span class="ptag">webOS 4+</span><span
+                class="ptag">Chromecast</span><span class="ptag">Memory Profiling</span>
+            </div>
+          </div>
+          <div class="ott-card">
+            <div class="ott-icon">📊</div>
+            <div class="ott-card-title">Ad-Tech · Analytics · SDK</div>
+            <div class="ott-card-desc">Independently engineered a <strong>custom Ad-Tech SDK</strong> from zero to
+              replace Google IMA SDK on legacy Smart TV hardware with severe memory constraints. Built ad-decision
+              logic, VAST/VMAP parsing, impression tracking, and click-through analytics — enabling advertising revenue
+              on previously unsupported devices.</div>
+            <div class="ott-stats">
+              <div class="ott-stat">
+                <div class="ott-stat-val">VAST</div>
+                <div class="ott-stat-lbl">Parsing</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">VMAP</div>
+                <div class="ott-stat-lbl">Scheduling</div>
+              </div>
+              <div class="ott-stat">
+                <div class="ott-stat-val">SDK</div>
+                <div class="ott-stat-lbl">Custom Built</div>
+              </div>
+            </div>
+            <div class="platform-tags">
+              <span class="ptag">Custom SDK</span><span class="ptag">VAST 3.0</span><span class="ptag">VMAP</span><span
+                class="ptag">Ad Analytics</span><span class="ptag">Impression Tracking</span>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Education & Languages Section -->
-    <section id="education" class="education section">
-        <h2 class="section-title reveal">Education & Languages</h2>
-        <div class="edu-lang-grid">
-            <div class="glass-panel reveal" style="border-color: rgba(6, 182, 212, 0.3);">
-                <h3 style="color: var(--cyan); margin-bottom: 1.5rem; font-size: 1.3rem;">🎓 Education</h3>
-                <div style="margin-bottom: 1rem;">
-                    <h4 style="color: #fff; margin-bottom: 0.3rem;">Bachelor of Technology</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Computer Science & Engineering</p>
-                </div>
-            </div>
-            <div class="glass-panel reveal" style="border-color: rgba(79, 70, 229, 0.3);">
-                <h3 style="color: var(--indigo); margin-bottom: 1.5rem; font-size: 1.3rem;">🌍 Languages</h3>
-                <div class="tech-chips">
-                    <span class="chip">English (Professional)</span>
-                    <span class="chip">Hindi (Conversational)</span>
-                    <span class="chip">Telugu (Native)</span>
-                </div>
-            </div>
+        <!-- AD PIPELINE -->
+        <div class="ads-pipeline reveal">
+          <div class="pipeline-title">⚙️ Custom Ad-Tech SDK Pipeline</div>
+          <div class="pipeline-steps">
+            <span class="p-step">App Init</span><span class="p-arrow">→</span>
+            <span class="p-step">Ad Request</span><span class="p-arrow">→</span>
+            <span class="p-step">VAST/VMAP Parse</span><span class="p-arrow">→</span>
+            <span class="p-step">Ad Scheduler</span><span class="p-arrow">→</span>
+            <span class="p-step">Content Pause</span><span class="p-arrow">→</span>
+            <span class="p-step">Ad Render</span><span class="p-arrow">→</span>
+            <span class="p-step">Impression Fire</span><span class="p-arrow">→</span>
+            <span class="p-step">Analytics Log</span><span class="p-arrow">→</span>
+            <span class="p-step">Content Resume</span>
+          </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-        <h2 class="section-title reveal">Get In Touch</h2>
-        <div class="contact-container reveal">
-            <div class="contact-info glass-panel">
-                <div class="contact-item">
-                    <span class="icon">📍</span>
-                    <p>Hyderabad, India</p>
-                </div>
-                <div class="contact-item">
-                    <span class="icon">📞</span>
-                    <a href="tel:+919381208503">+91-9381208503</a>
-                </div>
-                <div class="contact-item">
-                    <span class="icon">✉️</span>
-                    <a href="mailto:Madhuy1729@gmail.com">Madhuy1729@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <span class="icon">🔗</span>
-                    <a href="https://linkedin.com/in/rmadhuy1729" target="_blank">linkedin.com/in/rmadhuy1729</a>
-                </div>
-                <div class="contact-item">
-                    <span class="icon">💻</span>
-                    <a href="https://github.com/Madhu-1729" target="_blank">github.com/Madhu-1729</a>
-                </div>
-            </div>
-            <div class="contact-avatar-container">
-                <div class="ripple-avatar">
-                    <div class="avatar-text">MR</div>
-                    <div class="ripple"></div>
-                    <div class="ripple"></div>
-                    <div class="ripple"></div>
-                </div>
-            </div>
+        <!-- AWARD -->
+        <div class="award-banner reveal">
+          <div class="award-icon">🏆</div>
+          <div class="award-text">
+            <strong>Internal Excellence Recognition Award — YuppTV India</strong>
+            <span>Awarded for independently architecting and productionising the custom Ad-Tech SDK for legacy Smart TV
+              hardware — delivering critical advertising revenue capability under severe memory and CPU constraints on
+              devices previously deemed unsupported.</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // --- 1. Loading Screen ---
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-            }, 2000);
-        });
+  <!-- ═══════════ PROJECTS ═══════════ -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-label">What I've Built</div>
+      <h2 class="section-title">Key <span>Projects</span></h2>
+      <p class="section-sub">Production-grade applications serving millions of users worldwide</p>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-emoji">📺</div>
+          <div class="project-name">Watcho — Smart TV OTT App</div>
+          <p class="project-desc">Led end-to-end development of the Watcho Smart TV application on Samsung Tizen and LG
+            webOS. Full-featured streaming — live TV, VOD, on-demand — with integrated DRM security and custom Ad-Tech
+            SDK. Zero compliance rejections on Samsung and LG global app stores.</p>
+          <div class="project-tags">
+            <span class="project-tag">Angular</span><span class="project-tag">TypeScript</span><span
+              class="project-tag">Samsung Tizen</span><span class="project-tag">LG webOS</span><span
+              class="project-tag">Shaka Player</span><span class="project-tag">Widevine DRM</span><span
+              class="project-tag">Custom Ad SDK</span>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-emoji">🌐</div>
+          <div class="project-name">YuppTV Web Streaming Platform</div>
+          <p class="project-desc">High-traffic web OTT platform serving global audiences. Implemented dynamic content
+            carousels, authentication flows, subscription management, and multi-language support. Architected modular
+            lazy-loaded Angular modules reducing initial bundle size significantly.</p>
+          <div class="project-tags">
+            <span class="project-tag">Angular</span><span class="project-tag">React</span><span
+              class="project-tag">NgRx</span><span class="project-tag">RxJS</span><span class="project-tag">REST
+              APIs</span><span class="project-tag">AWS CloudFront</span><span class="project-tag">WebSockets</span>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-emoji">🧩</div>
+          <div class="project-name">Reusable UI Component Library</div>
+          <p class="project-desc">Designed and delivered a shared component library (buttons, modals, carousels, form
+            controls, video players) used across 3 product lines. Reduced duplication and sped up feature delivery by
+            40%. Documented with usage guidelines driving team adoption.</p>
+          <div class="project-tags">
+            <span class="project-tag">Angular</span><span class="project-tag">TypeScript</span><span
+              class="project-tag">SCSS</span><span class="project-tag">Angular Material</span><span
+              class="project-tag">Storybook</span><span class="project-tag">Component Architecture</span>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-emoji">⚡</div>
+          <div class="project-name">Real-Time Live Engagement Features</div>
+          <p class="project-desc">Built real-time multi-device synchronisation using PubNub and WebSockets for live
+            audience engagement — live chat, viewer count sync, watch-party features. Enabled concurrent multi-device
+            communication across the OTT platform.</p>
+          <div class="project-tags">
+            <span class="project-tag">PubNub</span><span class="project-tag">WebSockets</span><span
+              class="project-tag">Angular</span><span class="project-tag">Real-Time</span><span
+              class="project-tag">RxJS</span>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-emoji">🔒</div>
+          <div class="project-name">Custom Ad-Tech SDK (Legacy TV)</div>
+          <p class="project-desc">Ground-up Ad-Tech SDK built to replace Google IMA SDK on severely resource-constrained
+            legacy Smart TV hardware. Production-ready VAST/VMAP parsing, ad scheduling, impression tracking, and
+            analytics pipeline — enabling monetisation on previously unsupported devices.</p>
+          <div class="project-tags">
+            <span class="project-tag">Vanilla JS</span><span class="project-tag">VAST 3.0</span><span
+              class="project-tag">VMAP</span><span class="project-tag">Samsung Tizen</span><span class="project-tag">Ad
+              Analytics</span><span class="project-tag">Memory Optimisation</span>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-emoji">☁️</div>
+          <div class="project-name">CI/CD &amp; Cloud Infrastructure</div>
+          <p class="project-desc">Set up and maintained Jenkins CI/CD pipelines for development and production
+            deployments. Leveraged AWS S3 for artefact storage and CloudFront CDN for fast global asset delivery.
+            Managed Git branching strategies and release workflows.</p>
+          <div class="project-tags">
+            <span class="project-tag">Jenkins</span><span class="project-tag">AWS S3</span><span
+              class="project-tag">CloudFront</span><span class="project-tag">Git</span><span
+              class="project-tag">CI/CD</span><span class="project-tag">DevOps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // --- 2. Custom Cursor ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorRing = document.querySelector('.cursor-ring');
 
-        document.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-            
-            // Add a slight delay to the ring for a trailing effect
-            setTimeout(() => {
-                cursorRing.style.left = e.clientX + 'px';
-                cursorRing.style.top = e.clientY + 'px';
-            }, 50);
-        });
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">Let's Connect</div>
+      <h2 class="section-title">Get In <span>Touch</span></h2>
+      <div class="contact-grid">
+        <div class="contact-intro reveal-left">
+          <p>Open to <strong>Senior Frontend Developer</strong>, <strong>Frontend Lead</strong>, and <strong>Frontend
+              Architect</strong> roles. <strong>Open to work.</strong> Available for positions in Hyderabad or
+            hybrid. Let's build something extraordinary together.</p>
+          <div class="contact-cards">
+            <a href="mailto:Madhuy1729@gmail.com" class="contact-card">
+              <div class="contact-icon ci-indigo">✉️</div>
+              <div>
+                <div class="contact-card-label">Email</div>
+                <div class="contact-card-val">Madhuy1729@gmail.com</div>
+              </div>
+            </a>
+            <a href="tel:+919381208503" class="contact-card">
+              <div class="contact-icon ci-pink">📞</div>
+              <div>
+                <div class="contact-card-label">Phone</div>
+                <div class="contact-card-val">+91 93812 08503</div>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/rmadhuy1729" target="_blank" class="contact-card">
+              <div class="contact-icon ci-cyan">🔗</div>
+              <div>
+                <div class="contact-card-label">LinkedIn</div>
+                <div class="contact-card-val">linkedin.com/in/rmadhuy1729</div>
+              </div>
+            </a>
+            <a href="https://github.com/Madhu-1729" target="_blank" class="contact-card">
+              <div class="contact-icon ci-amber">💻</div>
+              <div>
+                <div class="contact-card-label">GitHub</div>
+                <div class="contact-card-val">github.com/Madhu-1729</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-avatar-wrap reveal-right">
+          <div>
+            <div class="ripple-avatar">
+              <div class="avatar-circle" style="font-size: 1.5rem; text-align: center; line-height: 1.2;">Madhu<br>Yadav R.</div>
+            </div>
+            <div class="availability">
+              <span class="hero-badge-dot"></span>
+              Available
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Hide cursor when leaving window
-        document.addEventListener('mouseleave', () => {
-            cursorDot.style.opacity = '0';
-            cursorRing.style.opacity = '0';
-        });
-        document.addEventListener('mouseenter', () => {
-            cursorDot.style.opacity = '1';
-            cursorRing.style.opacity = '1';
-        });
+  <!-- FOOTER -->
+  <footer>
+    <p>Crafted with ♥ by <span>Madhu Yadav</span> · Senior Frontend Developer · Hyderabad, India</p>
+    <p style="margin-top:.35rem;font-size:.75rem">Angular · React · TypeScript · OTT · Smart TV · AWS</p>
+  </footer>
 
-        // --- 3. Particle Background ---
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+  <!-- ═══════════ JAVASCRIPT ═══════════ -->
+  <script>
+    /* ─── LOADER ─── */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hide');
+      }, 2000);
+    });
 
-        let particlesArray;
+    /* ─── CURSOR ─── */
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    function animRing() {
+      rx += (mx - rx) * .12; ry += (my - ry) * .12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    } animRing();
 
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
-                this.x += this.directionX;
-                this.y += this.directionY;
-                this.draw();
-            }
+    /* ─── NAVBAR SCROLL ─── */
+    const nav = document.getElementById('navbar');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id });
+      navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur) });
+    }, { passive: true });
+
+    /* ─── HAMBURGER ─── */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    /* ─── PARTICLES ─── */
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, pts = [];
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; init(); }
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+    function init() {
+      pts = [];
+      const n = Math.min(80, Math.floor(W * H / 14000));
+      for (let i = 0; i < n; i++)pts.push({
+        x: rand(0, W), y: rand(0, H), vx: rand(-.25, .25), vy: rand(-.25, .25),
+        r: rand(1.2, 2.8), o: rand(.3, .7)
+      });
+    }
+    const COLORS = ['rgba(99,102,241,', 'rgba(236,72,153,', 'rgba(6,182,212,', 'rgba(245,158,11,'];
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      pts.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        const c = COLORS[i % COLORS.length];
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = c + p.o + ')'; ctx.fill();
+        for (let j = i + 1; j < pts.length; j++) {
+          const q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 140) {
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = c + (p.o * (1 - d / 140) * 0.4) + ')'; ctx.lineWidth = .6; ctx.stroke();
+          }
         }
+      });
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    resize(); draw();
 
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 15000;
-            // Limit particles on mobile for performance
-            if(window.innerWidth < 768) {
-                numberOfParticles = (canvas.height * canvas.width) / 25000;
-            }
-
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 1.5) - 0.75;
-                let directionY = (Math.random() * 1.5) - 0.75;
-                let color = Math.random() > 0.5 ? 'rgba(6, 182, 212, 0.4)' : 'rgba(236, 72, 153, 0.4)';
-                
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
+    /* ─── SKILL BARS via IntersectionObserver ─── */
+    const skillObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.skill-bar-fill').forEach(b => {
+            b.style.width = b.dataset.w + '%';
+          });
         }
+      });
+    }, { threshold: .15 });
+    document.querySelectorAll('.skills-grid').forEach(g => skillObs.observe(g));
 
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 10) * (canvas.height / 10)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = 'rgba(99, 102, 241,' + opacityValue + ')';
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
+    /* ─── SCROLL REVEAL ─── */
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
+    }, { threshold: .1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.timeline-item').forEach(el => revObs.observe(el));
 
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connect();
-        }
+    /* ─── TABS ─── */
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+      const panels = document.querySelectorAll('.tab-panel.active .timeline-item,.tab-panel.active .ott-card,.tab-panel.active .reveal');
+      panels.forEach(el => { if (!el.classList.contains('visible')) revObs.observe(el) });
+    }
 
-        window.addEventListener('resize', () => {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-            init();
-        });
-
-        init();
-        animate();
-
-        // --- 4. Scroll Reveal & Animated Progress Bars (Intersection Observer) ---
-        const reveals = document.querySelectorAll('.reveal');
-        const progressBars = document.querySelectorAll('.progress');
-        
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const revealObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        reveals.forEach(reveal => {
-            revealObserver.observe(reveal);
-        });
-
-        const progressObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const progress = entry.target;
-                    progress.style.width = progress.getAttribute('data-width');
-                    observer.unobserve(progress);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        progressBars.forEach(bar => progressObserver.observe(bar));
-
-        // --- 5. Mobile Menu ---
-        const menuBtn = document.getElementById('menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-link');
-        let menuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            if(!menuOpen) {
-                menuBtn.querySelector('.menu-btn__burger').style.background = 'transparent';
-                menuBtn.querySelector('.menu-btn__burger').style.transform = 'rotate(45deg)';
-                navLinks.classList.add('open');
-                menuOpen = true;
-            } else {
-                menuBtn.querySelector('.menu-btn__burger').style.background = '#fff';
-                menuBtn.querySelector('.menu-btn__burger').style.transform = 'rotate(0)';
-                navLinks.classList.remove('open');
-                menuOpen = false;
-            }
-        });
-
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                if(menuOpen) {
-                    menuBtn.click();
-                }
-            });
-        });
-
-        // --- 6. 3D Card Hover Effect ---
-        const card = document.getElementById('tilt-card');
-        
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -15;
-                const rotateY = ((x - centerX) / centerX) * 15;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-                card.style.transition = 'none';
-                card.style.animation = 'none';
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-                card.style.transition = 'transform 0.5s ease';
-                card.style.animation = 'float 6s ease-in-out infinite';
-            });
-        }
-        
-        // --- 7. Navbar Scroll Effect ---
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.style.padding = '1rem 5%';
-                navbar.style.background = 'rgba(3, 0, 20, 0.85)';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.padding = '1.5rem 5%';
-                navbar.style.background = 'rgba(3, 0, 20, 0.5)';
-                navbar.style.boxShadow = 'none';
-            }
-        });
-    </script>
+    /* ─── 3D CARD TILT on mousemove ─── */
+    const card3d = document.querySelector('.hero-3d-card');
+    if (card3d) {
+      card3d.addEventListener('mousemove', e => {
+        const r = card3d.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) / r.width;
+        const y = (e.clientY - r.top - r.height / 2) / r.height;
+        card3d.style.transform = `rotateX(${-y * 14}deg) rotateY(${x * 14}deg) translateZ(20px)`;
+      });
+      card3d.addEventListener('mouseleave', () => { card3d.style.transform = 'rotateX(0) rotateY(0) translateZ(0)' });
+    }
+  </script>
 </body>
+
 </html>
